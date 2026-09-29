@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="MainScene" extends="Scene">
-    <script type="type/brightscript" uri="pkg:/components/MainScene.brs" />
+    <script type="text/brightscript" uri="pkg:/components/MainScene.brs" />
+    
     <children>
-        <Video 
-            id="videoPlayer" 
-            width="1280" 
-            height="720" 
-            visible="true"
-            control="none" />
-        <Label 
-            id="statusLabel" 
-            text="Loading stream from backend..." 
-            translation="[100, 100]" 
-            color="0xFFFFFFFF" />
+        <Video
+            id="myVideoPlayer"
+            width="1920"
+            height="1080" />
     </children>
 </component>
