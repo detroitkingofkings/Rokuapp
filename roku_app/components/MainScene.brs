@@ -6,7 +6,7 @@ sub init()
         m.videoPlayer.setFocus(true)
     end if
     
-    fetchAndPlay("https://www.xnxx.com/video-118314115/sample_video")
+    fetchAndPlay("https://spankbang.com/83u1l/video/")
 end sub
 
 sub fetchAndPlay(targetUrl as String)
@@ -21,7 +21,7 @@ sub onResponseReceived()
     if jsonStr <> "" and jsonStr <> invalid
         json = ParseJson(jsonStr)
         if json <> invalid and json.stream_url <> invalid and json.stream_url <> ""
-            m.statusLabel.text = "Playing: " + json.stream_url
+            m.statusLabel.text = "Playing stream..."
             
             videoContent = CreateObject("roSGNode", "ContentNode")
             videoContent.url = json.stream_url
