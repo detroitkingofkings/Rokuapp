@@ -6,7 +6,8 @@ sub init()
         m.videoPlayer.setFocus(true)
     end if
     
-    fetchAndPlay("https://spankbang.com/83u1l/video/")
+    ' Pointing directly to the category listing page
+    fetchAndPlay("https://www.eporner.com/search/squirting/")
 end sub
 
 sub fetchAndPlay(targetUrl as String)
@@ -21,7 +22,7 @@ sub onResponseReceived()
     if jsonStr <> "" and jsonStr <> invalid
         json = ParseJson(jsonStr)
         if json <> invalid and json.stream_url <> invalid and json.stream_url <> ""
-            m.statusLabel.text = "Playing stream..."
+            m.statusLabel.text = "Playing category stream..."
             
             videoContent = CreateObject("roSGNode", "ContentNode")
             videoContent.url = json.stream_url
