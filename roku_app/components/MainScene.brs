@@ -1,25 +1,26 @@
 sub init()
-    m.video = m.top.findNode("myVideo")
-    m.video.control = "play"
-    fetchAndPlay("https://www.xnxx.com/video-XXXXX/example_video_title")
+    m.videoPlayer = m.top.findNode("videoPlayer")
+    fetchAndPlay("https://www.xnxx.com/video-118314115/sample_video")
 end sub
 
 sub fetchAndPlay(targetUrl as String)
-    request = CreateObject("roUrlTransfer")
-    apiUrl = "http://172.238.179.5:8000/feed?url=" + request.UrlEncode(targetUrl)
-    request.SetUrl(apiUrl)
-    request.SetCertificatesFile("common:/certs/ca-bundle.crt")
-    
-    response = request.GetToString()
-    json = ParseJson(response)
-    
-    if json <> invalid and json.stream_url <> invalid
-        videoContent = CreateObject("roSGNode", "ContentNode")
-        videoContent.url = json.stream_url
-        videoContent.title = json.title
-        videoContent.streamformat = "hls"
-        
-        m.video.content = videoContent
-        m.video.control = "play"
+    m.apiTask = CreateObject("roSGNode", "ApiTask")
+    m.apiTask.targetUrl = targetUrl
+    m.apiTask.observeField("response", "onResponseReceived")
+    m.apiTask.control = "RUN"
+end sub
+
+sub onResponseReceived()
+    jsonStr = m.apiTask.response
+    if jsonStr <> "" and jsonStr <> invalid
+        json = ParseJson(jsonStr)
+        if json <> invalid and json.stream_url <> invalid
+            videoContent = CreateObject("roSGNode", "ContentNode")
+            videoContent.url = json.stream_url
+            videoContent.streamFormat = "mp4"
+            
+            m.videoPlayer.content = videoContent
+            m.videoPlayer.control = "play"
+        end if
     end if
 end sub
