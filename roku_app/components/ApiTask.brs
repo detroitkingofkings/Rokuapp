@@ -9,7 +9,7 @@ sub executeRequest()
         request.InitClientCertificates()
         
         encodedUrl = request.UrlEncode(m.top.targetUrl)
-        apiUrl = "http://172.238.179.5:8000/stream?url=" + encodedUrl
+        apiUrl = "http://172.238.179.5:8000/feed?url=" + encodedUrl
         
         request.SetUrl(apiUrl)
         m.top.response = request.GetToString()

@@ -1,5 +1,8 @@
 sub init()
     m.videoPlayer = m.top.findNode("videoPlayer")
+    if m.videoPlayer <> invalid
+        m.videoPlayer.setFocus(true)
+    end if
     fetchAndPlay("https://www.xnxx.com/video-118314115/sample_video")
 end sub
 
